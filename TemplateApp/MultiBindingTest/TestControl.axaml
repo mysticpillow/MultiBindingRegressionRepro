@@ -1,0 +1,28 @@
+﻿<UserControl
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d"
+    x:Class="TemplateApp.MultiBindingTest.TestControl"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:converters="clr-namespace:TemplateApp.MultiBindingTest.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="clr-namespace:TemplateApp.MultiBindingTest.Models"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <StackPanel Spacing="5">
+        <TextBlock Name="textBlock">
+            <TextBlock.DataContext>
+                <models:TestModel />
+            </TextBlock.DataContext>
+            <TextBlock.Text>
+                <MultiBinding Converter="{x:Static converters:TestConverter.Instance}">
+                    <Binding DataType="models:TestModel" Path="(models:TestModel)" />
+                    <Binding DataType="models:TestModel" Path="(models:TestModel).DataUseStateUpdater" />
+                </MultiBinding>
+            </TextBlock.Text>
+        </TextBlock>
+        <Button Click="OnButtonClick">Increment</Button>
+    </StackPanel>
+
+</UserControl>
